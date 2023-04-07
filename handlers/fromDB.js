@@ -49,8 +49,6 @@ module.exports = {
             }
         });
 
-        console.log(data.count);
-
         if (data.count <= 0) {
             return false;
         }

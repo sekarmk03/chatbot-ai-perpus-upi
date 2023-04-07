@@ -67,6 +67,7 @@ module.exports = {
                         response.message = `Selamat! Koleksi dengan nomor barcode ${result.barcode_nmbr} berhasil diperpanjang. Jangan lupa untuk mengembalikan koleksi ini sebelum tanggal ${result.due_back_dt}.`;
                     } else {
                         response.message = "Mohon maaf, perpanjangan koleksi gagal. Barcode yang kamu masukkan salah atau sudah melewati batas kuota perpanjangan.";
+                        response.option.push('Daftar Anggota');
                     }
                     response.option.push('Pengembalian Buku');
                     response.option.push('Koleksi Rusak/Hilang');
