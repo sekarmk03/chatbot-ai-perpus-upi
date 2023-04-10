@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const morgan = require('morgan');
+const cors = require('cors');
 const router = require('./routes')
 
 const app = express();
@@ -11,14 +12,23 @@ const SESSION_SECRET = process.env.SESSION_SECRET;
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors({
-    origin: "*",
+    origin: ['http://localhost:3000', 'http://perpustakaan.upi.edu:8080'],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
     credentials: true,
 }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: false,
+        secure: false,
+        sameSite: false
+    }
 }));
 
 app.use('/v1/api', router);
